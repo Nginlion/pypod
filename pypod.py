@@ -5,16 +5,17 @@ import httplib, urllib, urllib2
 import socket
 import time
 import re
+import cfg
 
 urllib2_urlopen = urllib2.urlopen
 re_findall = re.findall
 
 params = dict(
-    login_email="foo@bar.com", # replace with your email
-    login_password="password", # replace with your password
+    login_email=cfg.un, # replace with your email
+    login_password=cfg.pw, # replace with your password
     format="json",
-    domain_id=00000000, # replace with your domain_od, can get it by API Domain.List
-    record_id=00000000, # replace with your record_id, can get it by API Record.List
+    domain_id=cfg.did, # replace with your domain_od, can get it by API Domain.List
+    record_id=cfg.rid, # replace with your record_id, can get it by API Record.List
     sub_domain="www", # replace with your sub_domain
     record_line="默认",
 )
