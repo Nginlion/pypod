@@ -14,7 +14,6 @@ def get_domain_id(username, password, domain):
 		if doc.xpath('//name/text()="' + domain + '"'):
 			domain_id = doc.xpath('//id[contains(../name/text(), "' + domain + '")]/text()')
 			return domain_id
-		print ret_xml
 		return False
 	except Exception, e:
 		print e
@@ -37,8 +36,23 @@ def main(argc, argv):
 		username = argv[1]
 		password = argv[2]
 		domain = argv[3]
-		domain_id = get_domain_id(username, password, domain)[0]
-		record_id = get_record_id(username, password, domain_id)[0]
+		
+		ret = get_domain_id(username, password, domain)
+	        domain_id = 0
+	        if False != ret:
+			domain_id = ret[0]
+	        else:
+			print 'Error: can not get domain id'
+			return
+
+		ret = get_record_id(username, password, domain_id)
+		record_id = 0
+		if False != ret:
+			record_id = ret[0]
+		else:
+			print 'Error: can not get record id'
+			return
+		
 		fd = open('./cfg.py', 'w')
 		fd.write('un="' + username + "\"\n")
 		fd.write('pw="' + password + "\"\n")
