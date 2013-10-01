@@ -26,6 +26,14 @@ def get_record_id(username, password, domain_id, record_type="www"):
 		if doc.xpath('//name/text()="' + record_type  + '"'):
 			record_id = doc.xpath('//id[contains(../name/text(), "' + record_type + '")]/text()')
 			return record_id
+		else:
+			payload = 'login_email=' + username + '&login_password=' + password + '&domain_id=' + domain_id + '&sub_domain=' + record_type + '&record_type=A&record_line=%e9%bb%98%e8%ae%a4&value=8.8.8.8'
+			ret_xml = urllib2_urlopen('https://dnsapi.cn/Record.Create', data=payload, timeout=10).read()
+			doc = etree.XML(ret_xml)
+			ret_code = int(doc.xpath('//status/code/text()')[0])
+			if 1 == ret_code:
+				record_id = doc.xpath('//record/id/text()')
+				return record_id
 		return False
 	except Exception, e:
 		print e
@@ -38,10 +46,10 @@ def main(argc, argv):
 		domain = argv[3]
 		
 		ret = get_domain_id(username, password, domain)
-	        domain_id = 0
-	        if False != ret:
+		domain_id = 0
+		if False != ret:
 			domain_id = ret[0]
-	        else:
+		else:
 			print 'Error: can not get domain id'
 			return
 
