@@ -9,12 +9,11 @@ pypod
 
 配置方式目前请按照如下步骤：
 
-1. 首先请在dnspod上新建一条www的A记录；
-2. 在本地先执行config.py脚本，执行方法是：
+1. 在本地先执行config.py脚本，执行方法是：
 <pre>
 python config.py your_dnspod_username your_dnspod_password domain 
 </pre>
-3. 之后执行pypod脚本
+2. 之后执行pypod脚本
 <pre>
 python pypod.py
 </pre>
