@@ -36,7 +36,7 @@ def ddns(ip):
 
 def getip():
 	try:
-		ip = re_findall(r"\[.+\]", urllib2_urlopen("http://iframe.ip138.com/ic.asp", timeout=10).read())[0][1:-1]
+		ip = re_findall(r"\[.+\]", urllib2_urlopen("http://1111.ip138.com/ic.asp", timeout=10).read())[0][1:-1]
 	except Exception, e:
 		print e
 		pass
